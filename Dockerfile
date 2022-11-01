@@ -1,5 +1,5 @@
-FROM node:18
+FROM python
+RUN pip3 install matplotlib matplotlib pandas scipy
 WORKDIR /app
-COPY package*.json /app/
-COPY src/index.js /app
-CMD node index.js
+COPY src/QoF.py /app
+CMD python QoF.py
