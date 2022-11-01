@@ -20,7 +20,7 @@ It expects exactly two command line arguments:
 All you need to do to run the workload on Bacalhau is to provide
 1. the `CID` of the folder with your datasets
 2. the *public* URI of your `IMAGE`
-3. the paths of the `INPUT_DIR` and `OUTOUT_DIR` directories
+3. the paths of the `INPUT_DIR` and `OUTPUT_DIR` directories
 
 Then by running
 `bacalhau docker run -v ${CID}:/inputs ${IMAGE} python -- QoF.py ${INPUT_DIR} ${OUTOUT_DIR}`
