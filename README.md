@@ -8,50 +8,24 @@ Compute on Weather using Compute over Data!
 - [Bacalhau cli](https://docs.bacalhau.org/getting-started/installation)
 - Datasets of weather data from WeatherXM weather stations - both observations and forecasts
 
-## Datasets
-
-The data are expected to be in the following format:
-```
-{
-  epoch: {
-    temperature,
-    humidity,
-    wind_speed
-  },
-  ...
-}
-```
-
-for example: 
-```
-{
-  "1640988000000": { "temperature": 11.2, "humidity": 64.7, "wind_speed": 1.23 },
-  "1640991600000": { "temperature": 11.2, "humidity": 65.4, "wind_speed": 0.84 },
-  "1640995200000": { "temperature": 11.4, "humidity": 66.1, "wind_speed": 1.19 }
-}
-```
-
-A couple of datasets for demonstration purposes can be found [here](https://ipfs.io/ipfs/QmPvzQ5ciXdEqXsJqiCyewcryqhACxaPTsksugawa8TQrv) 
-
 ## Code
 
-A simple script is provided that caclulates the RMSE between the forecasted and actual value of each weather measurement and then prints it out.
+A simple script is provided that caclulates statistical indexes, produces helpful images for the researcher and lastly prints out the results.
 It expects exactly two command line arguments:
-- the path to the file of observations
-- the path to the file of forecasts
+- the path to the directory with the weather data
+- the path to the directory where the images should be stored
 
 ## Running 
 
 All you need to do to run the workload on Bacalhau is to provide
 1. the `CID` of the folder with your datasets
 2. the *public* URI of your `IMAGE`
-3. the filenames of the `OBSERVATIONS` and `FORECAST` datasets
+3. the paths of the ${INPUT_DIR} and ${OUTOUT_DIR} directories
 
 Then by running
-`bacalhau docker run -v ${CID}:/inputs ${IMAGE} node -- index.js /inputs/${OBSERVATIONS} /inputs/${FORECAST}`
-your workload will be submitted for execution to the network. A couple of examples would be:
-`bacalhau docker run -v QmPvzQ5ciXdEqXsJqiCyewcryqhACxaPTsksugawa8TQrv:/inputs ghcr.io/chatper/accuracy-tracking:latest node -- index.js /inputs/mall-actual.json /inputs/mall-forecast.json`
-`bacalhau docker run -v QmPvzQ5ciXdEqXsJqiCyewcryqhACxaPTsksugawa8TQrv:/inputs ghcr.io/chatper/accuracy-tracking:latest node -- index.js /inputs/ymittos-actual.json /inputs/ymittos-forecast.json`
+`bacalhau docker run -v ${CID}:/inputs ${IMAGE} python -- QoF.py ${INPUT_DIR} ${OUTOUT_DIR}`
+your workload will be submitted for execution to the network. An example would be:
+`bacalhau docker run -v QmXBfz2h5nTL2EjCvHvDia3y6aAdEcBEBGRTo2sN1yAR8f:/weather ghcr.io/weatherxm/cod-demo:latest python -- QoF.py /weather /outputs`
 
 ## Developing  
 
