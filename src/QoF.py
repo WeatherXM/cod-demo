@@ -5,7 +5,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
-import math
+import math, json
 
 if len(sys.argv) != 3:
     print('Not enough CLI arguments provided!')
@@ -265,6 +265,7 @@ WS_rmse = [[np.nan]*int(days_of_data) for i in range(num_of_models+num_of_ws)]
 
 
 
+output = []
 for l in range(0, num_of_models):
     for y in range(days_of_data):
         T_cc[l][y] = stats.spearmanr(T[l][y],T[num_of_models][y],nan_policy='omit')[0]
@@ -275,6 +276,14 @@ for l in range(0, num_of_models):
 
         WS_cc[l][y] = stats.spearmanr(WS[l][y], WS[num_of_models][y], nan_policy='omit')[0]
         WS_rmse[l][y] = rmse(WS[l][y], WS[num_of_models][y], 'omit')
+    results = {
+        "T_rmse": list(zip(xmajor_labels, T_rmse[l])),
+        "RH_rmse": list(zip(xmajor_labels, RH_rmse[l])),
+        "WS_rmse": list(zip(xmajor_labels, WS_rmse[l])),
+    }
+    output.append(results)
+
+print(json.dumps(output))
 
 
 
@@ -286,8 +295,5 @@ stats_plotter(WS_cc,'r',-1,1,0.1,'Wind Speed (1-day ahead forecast) - Spearman C
 stats_plotter(T_rmse,'RMSE',0,5,1,'Temperature (1-day ahead forecast) - RMSE')
 stats_plotter(RH_rmse,'RMSE',0,30,2.5,'RH (1-day ahead forecast) - RMSE')
 stats_plotter(WS_rmse,'RMSE',0,15,2.5,'Wind Speed (1-day ahead forecast) - RMSE')
-
-
-
 
 
