@@ -25,7 +25,7 @@ All you need to do to run the workload on Bacalhau is to provide
 Then by running
 `bacalhau docker run -v ${CID}:/inputs ${IMAGE} python -- QoF.py ${INPUT_DIR} ${OUTOUT_DIR}`
 your workload will be submitted for execution to the network. An example would be:
-`bacalhau docker run -v QmXBfz2h5nTL2EjCvHvDia3y6aAdEcBEBGRTo2sN1yAR8f:/inputs ghcr.io/weatherxm/cod-demo:latest python -- QoF.py /inputs/ws_lisbon /outputs`
+`bacalhau docker run -v QmVc7o6daLsVoQYUoFmp3rkD8XXD9pXnmsbgyTWmB89w3h:/inputs ghcr.io/weatherxm/cod-demo:latest python -- QoF.py /inputs/ws_lisbon /outputs`
 
 To take advantage of the sharding capabilities you can use a glob pattern instead of a specific path as `INPUT_DIR`, for example
 ```
