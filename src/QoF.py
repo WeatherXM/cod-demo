@@ -98,10 +98,14 @@ pattern = sys.argv[1]
 print('Using glob pattern: ', pattern)
 for dir in glob.glob(pattern):
     exp_path = dir + '/'
-    out_path = sys.argv[2] + '/'
+    out_path = sys.argv[2] + '/' + os.path.basename(dir) + '/'
     print('Will use files from ' + exp_path + ' and store images at ' + out_path)
     obs_path = exp_path + 'obs/'
     for_path = exp_path + 'for/'
+
+    if not os.path.exists(out_path):
+        print('Creating directory:', out_path)
+        os.makedirs(out_path)
 
     #Getting observation files
     os.chdir(obs_path)
@@ -286,7 +290,7 @@ for dir in glob.glob(pattern):
         }
         output.append(results)
 
-    print(json.dumps(output))
+    print(json.dumps(output, indent=2))
 
 
 
