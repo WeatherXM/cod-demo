@@ -1,6 +1,6 @@
-# cod-demo
+# WeatherXM Demo for CoD Summit @ LabWeek22
 
-Compute on Weather using Compute over Data!
+Compute on Weather Data using Compute over Data with Bacalhau!
 
 ## Prerequisites
 
