@@ -31,7 +31,7 @@ bacalhau docker run -v QmVc7o6daLsVoQYUoFmp3rkD8XXD9pXnmsbgyTWmB89w3h:/inputs gh
 
 To take advantage of the sharding capabilities you can use a glob pattern instead of a specific path as `INPUT_DIR`, for example
 ```
-bacalhau docker run -v QmVc7o6daLsVoQYUoFmp3rkD8XXD9pXnmsbgyTWmB89w3h:/inputs --sharding-base-path "/inputs" --sharding-glob-pattern "ws_*" --sharding-batch-size 1 ghcr.io/weatherxm/cod-demo:latest python -- QoF.py /inputs/ws_* /outputs
+bacalhau docker run -v QmVc7o6daLsVoQYUoFmp3rkD8XXD9pXnmsbgyTWmB89w3h:/inputs --sharding-base-path "/inputs" --sharding-glob-pattern "ws_*" --sharding-batch-size 1 ghcr.io/weatherxm/cod-demo:latest python -- QoF.py "/inputs/ws_*" /outputs
 ```
 
 ## Developing  
